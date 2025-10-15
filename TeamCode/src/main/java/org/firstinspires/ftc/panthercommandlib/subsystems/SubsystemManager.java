@@ -24,4 +24,11 @@ public class SubsystemManager {
     public static HashSet<Subsystem> getSubsystems() {
         return subsystems;
     }
+
+    /**
+     * Clear the data from memory
+     */
+    public static void clear() {
+        subsystems.clear();
+    }
 }

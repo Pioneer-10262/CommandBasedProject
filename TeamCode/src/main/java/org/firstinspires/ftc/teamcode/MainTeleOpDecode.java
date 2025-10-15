@@ -4,7 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.panthercommandlib.commands.CommandRunner;
+import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.ParrallelCommandGroup;
+import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.SequentialCommandGroup;
+import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
 import org.firstinspires.ftc.panthercommandlib.util.Timer;
+import org.firstinspires.ftc.teamcode.commands.SpinMotor;
+import org.firstinspires.ftc.teamcode.subsystems.PioneerMotor;
 
 
 @TeleOp
@@ -29,7 +35,6 @@ public class MainTeleOpDecode extends OpMode {
         }
 
         // code runs
-
         if (pioneerTimer.getTimeSeconds() < 3) {
             pioneerMotor.setPower(0.9);
         }

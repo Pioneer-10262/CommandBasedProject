@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.panthercommandlib.commands;
 
+import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.SequentialCommandGroup;
+import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
 import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
 
 import java.util.Arrays;
@@ -10,6 +12,7 @@ public abstract class Command {
     private final HashSet<Subsystem> requiredSubsystems = new HashSet<>();
 
     private Command deadline = null;
+    private final SequentialCommandGroup nextCommands = new SequentialCommandGroup(this);
 
     /**
      * A Command is code that utilizes subsystems to physically do something on the robot.
@@ -53,6 +56,14 @@ public abstract class Command {
         requiredSubsystems.addAll(Arrays.asList(subsystems));
     }
 
+    public void run() {
+        CommandRunner.runCommand(this);
+    }
+
+    public void forceRun() {
+        CommandRunner.forceRunCommand(this);
+    }
+
     /**
      * You should not be calling this. You just don't have to.
      * This is used inside the command scheduler to choose whether or not it is allowed to run teh command
@@ -88,7 +99,26 @@ public abstract class Command {
         return this;
     }
 
+    /**
+     * This is a modifier for this command. It sets another command, if any, that will run after this command finishes and any
+     * other that you added after.
+     *
+     * @param command The command that you want to add to the sequence
+     * @return This returns this Command
+     */
+    public SequentialCommandGroup andThen(Command command) {
+        nextCommands.addCommand(command);
+
+        return nextCommands;
+    }
+
+    public
+
     Command getDeadlineCommand() {
         return deadline;
+    }
+
+    CommandGroup getNextCommands() {
+        return nextCommands;
     }
 }

@@ -19,10 +19,10 @@ public class SequentialCommandGroup extends CommandGroup {
         if (isFinished()) return;
 
         if (!commandStarted) {
-            CommandRunner.forceRunCommand(commands[index]);
+            CommandRunner.forceRunCommand(commands.get(index));
             commandStarted = true;
         } else {
-            if (!CommandRunner.getCommandsRunning().contains(commands[index])) {
+            if (!CommandRunner.getCommandsRunning().contains(commands.get(index))) {
                 commandStarted = false;
                 index++;
             }
@@ -31,6 +31,6 @@ public class SequentialCommandGroup extends CommandGroup {
 
     @Override
     public boolean isFinished() {
-        return index >= commands.length;
+        return index >= commands.size();
     }
 }

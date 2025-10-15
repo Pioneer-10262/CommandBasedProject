@@ -135,6 +135,14 @@ public class CommandRunner {
     }
 
     /**
+     * Clear the data from memory
+     */
+    public static void clear() {
+        commandsRunning.clear();
+        subsystemsInUse.clear();
+    }
+
+    /**
      * Gets all the commands currently running
      *
      * @return All of the commands currently running

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.panthercommandlib.commands.standardcommands;
 
 import org.firstinspires.ftc.panthercommandlib.commands.Command;
+import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
 
 public class InstantCommand extends Command {
     Runnable code;
@@ -9,9 +10,12 @@ public class InstantCommand extends Command {
      * This will run the code given, and afterwards end IMMEDIATELY
      *
      * @param code The code that you want to run instantly
+     * @param requirements These are the subsystems, if any, that you are physically using on the robot
      */
-    public InstantCommand(Runnable code) {
+    public InstantCommand(Runnable code, Subsystem... requirements) {
         this.code = code;
+
+        addRequiredSubsystems(requirements);
     }
 
     /**
