@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.panthercommandlib.commands.CommandRunner;
 import org.firstinspires.ftc.panthercommandlib.subsystems.SubsystemManager;
+import org.firstinspires.ftc.panthercommandlib.triggers.TriggerHandler;
 
 public abstract class RobotContainer extends OpMode {
 
@@ -18,6 +19,9 @@ public abstract class RobotContainer extends OpMode {
         // Then initialize the default commands
         initializeDefaultCommands();
 
+        // Add the triggers
+        addTriggers();
+
         // Finally run the init code
         onInit();
     }
@@ -27,11 +31,11 @@ public abstract class RobotContainer extends OpMode {
      */
     @Override
     public void loop() {
-        onUpdate();
-
         CommandRunner.executeCommands();
+
         SubsystemManager.updateSubsystems();
 
+        TriggerHandler.updateTriggers();
     }
 
     /**
@@ -53,7 +57,7 @@ public abstract class RobotContainer extends OpMode {
     public abstract void initializeDefaultCommands();
 
     /**
-     * This code will run in the update loop. Here you can put code that you want to run continuously
+     * This is where you can add your triggers
      */
-    public abstract void onUpdate();
+    public abstract void addTriggers();
 }

@@ -8,44 +8,34 @@ import org.firstinspires.ftc.panthercommandlib.commands.CommandRunner;
 import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.ParrallelCommandGroup;
 import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.SequentialCommandGroup;
 import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
+import org.firstinspires.ftc.panthercommandlib.container.RobotContainer;
+import org.firstinspires.ftc.panthercommandlib.triggers.Trigger;
 import org.firstinspires.ftc.panthercommandlib.util.Timer;
 import org.firstinspires.ftc.teamcode.commands.SpinMotor;
 import org.firstinspires.ftc.teamcode.subsystems.PioneerMotor;
+import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
 
 @TeleOp
-public class MainTeleOpDecode extends OpMode {
-    DcMotor pioneerMotor;
-    Timer pioneerTimer;
-
-    boolean timerHasStarted = false;
+public class MainTeleOpDecode extends RobotContainer {
+    PioneerMotor motor;
+    Vision vision;
 
     @Override
-    public void init() {
-        pioneerMotor = hardwareMap.get(DcMotor.class, "motor");
-        pioneerTimer = new Timer();
+    public void onInit() {}
+
+    @Override
+    public void initializeSubsystems() {
+        motor = new PioneerMotor(hardwareMap, "motor");
+        vision = new Vision(hardwareMap, telemetry);
     }
 
     @Override
-    public void loop() {
-        if(!timerHasStarted){
-            pioneerTimer.start();
+    public void initializeDefaultCommands() {
+    }
 
-            timerHasStarted = true;
-        }
-
-        // code runs
-        if (pioneerTimer.getTimeSeconds() < 3) {
-            pioneerMotor.setPower(0.9);
-        }
-
-        if (pioneerTimer.getTimeSeconds() > 6){
-            pioneerMotor.setPower(0);
-        }
-
-        if (pioneerTimer.getTimeSeconds() > 9){
-            pioneerTimer.reset();
-            pioneerTimer.start();
-        }
+    @Override
+    public void addTriggers() {
+        new Trigger(() -> gamepad1.a).onTrue(new SpinMotor(motor));
     }
 }
