@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.pantherprogrammingrc.commands;
+package org.firstinspires.ftc.panthercommandlib.commands;
 
-import org.firstinspires.ftc.pantherprogrammingrc.subsystems.Subsystem;
+import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.HashSet;
 public abstract class Command {
     // This is a set that will store ALL REQUIRED SUBSYSTEMS THAT ARE USED BY THIS COMMAND
     private final HashSet<Subsystem> requiredSubsystems = new HashSet<>();
-    private Command nextCommand = null;
+
     private Command deadline = null;
 
     /**
@@ -76,18 +76,6 @@ public abstract class Command {
     // ------------------------------------------------
 
     /**
-     * This is modifier for this command. It sets the command, if any, that will run when this one is finished or interrupted
-     *
-     * @param command The command that you want to run
-     * @return This returns this Command
-     */
-    public Command andThen(Command command) {
-        this.nextCommand = command;
-
-        return this;
-    }
-
-    /**
      * This is a modifier for this command. It sets teh command, if any, that will run at the same time as this one,
      * and if this other command finishes before this one, it will force end this command, acting as a deadline
      *
@@ -98,10 +86,6 @@ public abstract class Command {
         this.deadline = command;
 
         return this;
-    }
-
-    Command getNextCommand() {
-        return nextCommand;
     }
 
     Command getDeadlineCommand() {

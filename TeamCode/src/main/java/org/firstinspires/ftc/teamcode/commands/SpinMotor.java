@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.commands;
 
-import org.firstinspires.ftc.pantherprogrammingrc.commands.Command;
+import org.firstinspires.ftc.panthercommandlib.commands.Command;
 import org.firstinspires.ftc.teamcode.subsystems.PioneerMotor;
-import org.firstinspires.ftc.pantherprogrammingrc.util.Timer;
+import org.firstinspires.ftc.panthercommandlib.util.Timer;
 
 public class SpinMotor extends Command {
     private Timer timer;

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.pantherprogrammingrc.subsystems.Subsystem;
+import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
 
 public class PioneerMotor extends Subsystem {
     private final DcMotor motor;

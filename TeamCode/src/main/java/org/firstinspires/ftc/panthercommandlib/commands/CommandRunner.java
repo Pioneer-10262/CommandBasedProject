@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.pantherprogrammingrc.commands;
+package org.firstinspires.ftc.panthercommandlib.commands;
 
 import android.util.Pair;
 
-import org.firstinspires.ftc.pantherprogrammingrc.subsystems.Subsystem;
-import org.firstinspires.ftc.pantherprogrammingrc.subsystems.SubsystemManager;
+import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
+import org.firstinspires.ftc.panthercommandlib.subsystems.SubsystemManager;
 
 import java.util.HashSet;
 
@@ -115,6 +115,8 @@ public class CommandRunner {
      * @param interrupted Whether or not you interrupted that command with another one
      */
     private static void endCommand(Command command, boolean interrupted) {
+        if (!commandsRunning.contains(command)) return;
+
         for (Subsystem s : command.getRequiredSubsystems()) {
             subsystemsInUse.remove(s);
         }
@@ -122,9 +124,6 @@ public class CommandRunner {
         commandsRunning.remove(command);
 
         command.onFinish(interrupted);
-
-        // TODO: DECIDE IF THIS SHOULD BE FORCE RUN OR NOT
-        forceRunCommand(command.getNextCommand());
     }
 
     /** Ends commands that we want and marks it as interrupted since we cut it out
@@ -132,16 +131,15 @@ public class CommandRunner {
      * @param command The command that you want to end
      */
     public static void forceEndCommand(Command command) {
-        for (Subsystem s : command.getRequiredSubsystems()) {
-            subsystemsInUse.remove(s);
-        }
-
-        commandsRunning.remove(command);
-
-        command.onFinish(true);
-
-        // TODO: DECIDE IF THIS SHOULD BE FORCE RUN OR NOT
-        forceRunCommand(command.getNextCommand());
+        endCommand(command, true);
     }
 
+    /**
+     * Gets all the commands currently running
+     *
+     * @return All of the commands currently running
+     */
+    public static HashSet<Command> getCommandsRunning() {
+        return new HashSet<>(commandsRunning);
+    }
 }

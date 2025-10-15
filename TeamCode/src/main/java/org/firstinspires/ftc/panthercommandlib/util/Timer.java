@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.pantherprogrammingrc.util;
+package org.firstinspires.ftc.panthercommandlib.util;
 
 public class Timer {
     private long startTime;

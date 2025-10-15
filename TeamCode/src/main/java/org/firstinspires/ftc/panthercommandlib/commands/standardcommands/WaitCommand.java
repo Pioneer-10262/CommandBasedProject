@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.pantherprogrammingrc.commands.standardcommands;
+package org.firstinspires.ftc.panthercommandlib.commands.standardcommands;
 
-import org.firstinspires.ftc.pantherprogrammingrc.commands.Command;
-import org.firstinspires.ftc.pantherprogrammingrc.util.Timer;
+import org.firstinspires.ftc.panthercommandlib.commands.Command;
+import org.firstinspires.ftc.panthercommandlib.util.Timer;
 
 public class WaitCommand extends Command {
     private final Timer timer;

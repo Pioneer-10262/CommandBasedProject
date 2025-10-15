@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.pantherprogrammingrc.subsystems;
+package org.firstinspires.ftc.panthercommandlib.subsystems;
 
 import java.util.HashSet;
 

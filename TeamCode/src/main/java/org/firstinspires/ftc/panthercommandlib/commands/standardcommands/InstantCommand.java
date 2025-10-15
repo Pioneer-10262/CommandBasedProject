@@ -1,8 +1,6 @@
-package org.firstinspires.ftc.pantherprogrammingrc.commands.standardcommands;
+package org.firstinspires.ftc.panthercommandlib.commands.standardcommands;
 
-import org.firstinspires.ftc.pantherprogrammingrc.commands.Command;
-
-import java.time.Instant;
+import org.firstinspires.ftc.panthercommandlib.commands.Command;
 
 public class InstantCommand extends Command {
     Runnable code;

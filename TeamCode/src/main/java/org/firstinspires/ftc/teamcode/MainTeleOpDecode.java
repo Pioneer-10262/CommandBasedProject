@@ -1,50 +1,46 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.pantherprogrammingrc.commands.CommandRunner;
-import org.firstinspires.ftc.pantherprogrammingrc.commands.standardcommands.InstantCommand;
-import org.firstinspires.ftc.pantherprogrammingrc.container.PantherRobotContainer;
-import org.firstinspires.ftc.teamcode.commands.MosaicTest;
-import org.firstinspires.ftc.teamcode.commands.MotorPulse;
-import org.firstinspires.ftc.teamcode.commands.SpinMotor;
-import org.firstinspires.ftc.teamcode.subsystems.PioneerMotor;
-import org.firstinspires.ftc.teamcode.subsystems.Vision;
+import org.firstinspires.ftc.panthercommandlib.util.Timer;
+
 
 @TeleOp
-public class MainTeleOpDecode extends PantherRobotContainer {
-    Vision vision;
-    PioneerMotor motor;
+public class MainTeleOpDecode extends OpMode {
+    DcMotor pioneerMotor;
+    Timer pioneerTimer;
 
+    boolean timerHasStarted = false;
 
     @Override
-    public void onInit() {
-
+    public void init() {
+        pioneerMotor = hardwareMap.get(DcMotor.class, "motor");
+        pioneerTimer = new Timer();
     }
 
     @Override
-    public void initializeSubsystems() {
-        vision = new Vision(hardwareMap, telemetry);
-        motor = new PioneerMotor(hardwareMap, "motor");
-    }
+    public void loop() {
+        if(!timerHasStarted){
+            pioneerTimer.start();
 
-    @Override
-    public void initializeDefaultCommands() {
-        motor.setDefaultCommand(new MotorPulse(motor));
-    }
-
-    @Override
-    public void onUpdate() {
-        if (gamepad1.a) {
-            CommandRunner.runCommand(new MosaicTest(vision, motor));
+            timerHasStarted = true;
         }
 
-        if (gamepad1.b) {
-            CommandRunner.runCommand(new InstantCommand(() -> gamepad1.rumble(1000)));
+        // code runs
+
+        if (pioneerTimer.getTimeSeconds() < 3) {
+            pioneerMotor.setPower(0.9);
         }
 
-        if (gamepad1.x) {
-            CommandRunner.runCommand(new SpinMotor(motor));
+        if (pioneerTimer.getTimeSeconds() > 6){
+            pioneerMotor.setPower(0);
+        }
+
+        if (pioneerTimer.getTimeSeconds() > 9){
+            pioneerTimer.reset();
+            pioneerTimer.start();
         }
     }
 }

@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.pantherprogrammingrc.subsystems;
+package org.firstinspires.ftc.panthercommandlib.subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.pantherprogrammingrc.commands.Command;
-import org.firstinspires.ftc.pantherprogrammingrc.commands.standardcommands.InstantCommand;
+import org.firstinspires.ftc.panthercommandlib.commands.Command;
+import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
 
 public abstract class Subsystem {
     // Hardware map for the devices
