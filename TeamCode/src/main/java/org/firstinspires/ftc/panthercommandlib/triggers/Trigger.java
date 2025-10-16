@@ -78,8 +78,10 @@ public class Trigger {
      *
      * @param command The command that you want to run
      */
-    public void onTrue(Command command) {
+    public Trigger onTrue(Command command) {
         commandOnTrue = command;
+
+        return this;
     }
 
     /**
@@ -87,8 +89,10 @@ public class Trigger {
      *
      * @param command The command that you want to run
      */
-    public void onFalse(Command command) {
+    public Trigger onFalse(Command command) {
         commandOnFalse = command;
+
+        return this;
     }
 
     /**
@@ -96,8 +100,10 @@ public class Trigger {
      *
      * @param command The command that you want to run
      */
-    public void whileTrue(Command command) {
+    public Trigger whileTrue(Command command) {
         commandWhileTrue = command;
+
+        return this;
     }
 
     /**
@@ -105,8 +111,10 @@ public class Trigger {
      *
      * @param command The command that you want to run
      */
-    public void whileFalse(Command command) {
+    public Trigger whileFalse(Command command) {
         commandWhileFalse = command;
+
+        return this;
     }
 
     // ------------------------------------------------------------------------

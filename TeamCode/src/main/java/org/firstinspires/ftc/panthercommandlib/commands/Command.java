@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.panthercommandlib.commands;
 
+import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.RaceCommandGroup;
 import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.SequentialCommandGroup;
 import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
 import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
@@ -11,7 +12,7 @@ public abstract class Command {
     // This is a set that will store ALL REQUIRED SUBSYSTEMS THAT ARE USED BY THIS COMMAND
     private final HashSet<Subsystem> requiredSubsystems = new HashSet<>();
 
-    private Command deadline = null;
+    private final RaceCommandGroup deadlineGroup = new RaceCommandGroup(this);
     private final SequentialCommandGroup nextCommands = new SequentialCommandGroup(this);
 
     /**
@@ -93,10 +94,19 @@ public abstract class Command {
      * @param command The command that you want to act as the deadline
      * @return This returns this Command
      */
-    public Command withDeadline(Command command) {
-        this.deadline = command;
+    public RaceCommandGroup withDeadline(Command command) {
+        deadlineGroup.addCommand(command);
 
-        return this;
+        return deadlineGroup;
+    }
+
+    /**
+     * Instead of giving THIS command a deadline, it makes this command a deadline for the command passed in
+     *
+     * @param command The command that you want to use as the main command
+     */
+    public Command deadlineFor(Command command) {
+        return command.withDeadline(this);
     }
 
     /**
@@ -109,16 +119,6 @@ public abstract class Command {
     public SequentialCommandGroup andThen(Command command) {
         nextCommands.addCommand(command);
 
-        return nextCommands;
-    }
-
-    public
-
-    Command getDeadlineCommand() {
-        return deadline;
-    }
-
-    CommandGroup getNextCommands() {
         return nextCommands;
     }
 }

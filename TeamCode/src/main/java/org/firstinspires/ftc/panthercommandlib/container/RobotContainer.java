@@ -8,11 +8,8 @@ import org.firstinspires.ftc.panthercommandlib.triggers.TriggerHandler;
 
 public abstract class RobotContainer extends OpMode {
 
-    /**
-     * DO NOT RUN THIS -- NOTHING WILL WORK IF YOU OVERRIDE THIS
-     */
     @Override
-    public void init() {
+    public final void init() {
         // First initialize the subsystems
         initializeSubsystems();
 
@@ -26,11 +23,8 @@ public abstract class RobotContainer extends OpMode {
         onInit();
     }
 
-    /**
-     * DO NOT RUN THIS -- NOTHING WILL WORK IF YOU OVERRIDE THIS
-     */
     @Override
-    public void loop() {
+    public final void loop() {
         CommandRunner.executeCommands();
 
         SubsystemManager.updateSubsystems();
