@@ -15,7 +15,7 @@ public class SequentialCommandGroup extends CommandGroup {
     }
 
     @Override
-    public void update() {
+    public final void update() {
         if (isFinished()) return;
 
         if (!commandStarted) {
@@ -30,7 +30,7 @@ public class SequentialCommandGroup extends CommandGroup {
     }
 
     @Override
-    public boolean isFinished() {
+    public final boolean isFinished() {
         return index >= commands.size();
     }
 }

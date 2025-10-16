@@ -17,15 +17,17 @@ public class CommandRunner {
      * this one will not run.
      *
      * @param command The command that you want to run. If the command that runs
+     * @return Returns whether or not the command got run. If it got run, this returns <code>true</code>, otherwise, it returns <code>false</code>
      */
-    public static void runCommand(Command command) {
-        if (commandsRunning.contains(command)) return;
+    @SuppressWarnings("all")
+    public static boolean runCommand(Command command) {
+        if (commandsRunning.contains(command)) return false;
 
         HashSet<Subsystem> requiredSubsystems = command.getRequiredSubsystems();
 
         for (Subsystem sub : requiredSubsystems) {
             if (subsystemsInUse.contains(sub)) {
-                return;
+                return false;
             }
         }
 
@@ -43,6 +45,8 @@ public class CommandRunner {
         if (!(deadlineCommand == null)) {
             forceRunCommand(deadlineCommand);
         }
+
+        return true;
     }
 
     /**

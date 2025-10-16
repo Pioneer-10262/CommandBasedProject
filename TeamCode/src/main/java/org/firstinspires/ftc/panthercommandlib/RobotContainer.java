@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.panthercommandlib.container;
+package org.firstinspires.ftc.panthercommandlib;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.panthercommandlib.commands.CommandRunner;
+import org.firstinspires.ftc.panthercommandlib.subsystems.Subsystem;
 import org.firstinspires.ftc.panthercommandlib.subsystems.SubsystemManager;
 import org.firstinspires.ftc.panthercommandlib.triggers.TriggerHandler;
 
@@ -30,6 +31,15 @@ public abstract class RobotContainer extends OpMode {
         SubsystemManager.updateSubsystems();
 
         TriggerHandler.updateTriggers();
+    }
+
+    @Override
+    public final void stop() {
+        CommandRunner.clear();
+
+        SubsystemManager.clear();
+
+        TriggerHandler.clear();
     }
 
     /**

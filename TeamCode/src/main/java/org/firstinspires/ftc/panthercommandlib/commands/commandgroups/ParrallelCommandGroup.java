@@ -14,7 +14,7 @@ public class ParrallelCommandGroup extends CommandGroup {
     }
 
     @Override
-    public void update() {
+    public final void update() {
         if (isFinished()) return;
 
         for (Command command : commands) {
@@ -25,7 +25,7 @@ public class ParrallelCommandGroup extends CommandGroup {
     }
 
     @Override
-    public boolean isFinished() {
+    public final boolean isFinished() {
         return commandsRun;
     }
 }

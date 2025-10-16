@@ -28,6 +28,6 @@ public class WaitCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return timer.getTimeMillis() <= waitTime;
+        return timer.getTimeMillis() >= waitTime;
     }
 }

@@ -1,16 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.panthercommandlib.commands.CommandRunner;
-import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.ParrallelCommandGroup;
-import org.firstinspires.ftc.panthercommandlib.commands.commandgroups.SequentialCommandGroup;
 import org.firstinspires.ftc.panthercommandlib.commands.standardcommands.InstantCommand;
-import org.firstinspires.ftc.panthercommandlib.container.RobotContainer;
+import org.firstinspires.ftc.panthercommandlib.RobotContainer;
 import org.firstinspires.ftc.panthercommandlib.triggers.Trigger;
-import org.firstinspires.ftc.panthercommandlib.util.Timer;
+import org.firstinspires.ftc.teamcode.commands.MotorPulse;
 import org.firstinspires.ftc.teamcode.commands.SpinMotor;
 import org.firstinspires.ftc.teamcode.subsystems.PioneerMotor;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
@@ -32,10 +27,17 @@ public class MainTeleOpDecode extends RobotContainer {
 
     @Override
     public void initializeDefaultCommands() {
+        motor.setDefaultCommand(new MotorPulse(motor));
     }
 
     @Override
     public void addTriggers() {
-        new Trigger(() -> gamepad1.a).onTrue(new SpinMotor(motor));
+        // Trigger to turn on the motor while the a button is pressed
+        new Trigger(() -> gamepad1.a)
+                .onTrue(new InstantCommand(() -> motor.setPower(0.5), motor))
+                .onFalse(new InstantCommand(() -> motor.setPower(0), motor));
+
+        // Trigger to run SpinMotor when the b button is pressed
+        new Trigger(() -> gamepad1.b).onTrue(new SpinMotor(motor));
     }
 }

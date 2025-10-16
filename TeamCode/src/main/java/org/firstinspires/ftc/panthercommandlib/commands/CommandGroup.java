@@ -27,18 +27,19 @@ public abstract class CommandGroup extends Command {
         return this;
     }
 
-    /**
-     * This is default, you should not have to change this!
-     *
-     * @param commandInterrupted This value is true if the command was interrupted by another one
-     */
     @Override
-    public void onFinish(boolean commandInterrupted) {}
+    public final void onFinish(boolean commandInterrupted) {
+        for (Command command : commands) {
+            if (!CommandRunner.getCommandsRunning().contains(command)) {
+                command.forceEnd();
+            }
+        }
+    }
 
     // ----------------------------------
 
     /**
-     * This code should decide how <code>commands</code> get run.
+     * This code should decide how <code> commands</code> get run.
      */
     public abstract void update();
 

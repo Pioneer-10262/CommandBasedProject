@@ -12,7 +12,7 @@ public abstract class Command {
     // This is a set that will store ALL REQUIRED SUBSYSTEMS THAT ARE USED BY THIS COMMAND
     private final HashSet<Subsystem> requiredSubsystems = new HashSet<>();
 
-    private final RaceCommandGroup deadlineGroup = new RaceCommandGroup(this);
+    private Command deadline = null;
     private final SequentialCommandGroup nextCommands = new SequentialCommandGroup(this);
 
     /**
@@ -57,12 +57,25 @@ public abstract class Command {
         requiredSubsystems.addAll(Arrays.asList(subsystems));
     }
 
+    /**
+     * Runs this command
+     */
     public void run() {
         CommandRunner.runCommand(this);
     }
 
+    /**
+     * Force runs this command
+     */
     public void forceRun() {
         CommandRunner.forceRunCommand(this);
+    }
+
+    /**
+     * Force ends this command
+     */
+    public void forceEnd() {
+        CommandRunner.forceEndCommand(this);
     }
 
     /**
@@ -94,10 +107,10 @@ public abstract class Command {
      * @param command The command that you want to act as the deadline
      * @return This returns this Command
      */
-    public RaceCommandGroup withDeadline(Command command) {
-        deadlineGroup.addCommand(command);
+    public Command withDeadline(Command command) {
+        this.deadline = command;
 
-        return deadlineGroup;
+        return this;
     }
 
     /**
@@ -120,5 +133,11 @@ public abstract class Command {
         nextCommands.addCommand(command);
 
         return nextCommands;
+    }
+
+    public
+
+    Command getDeadlineCommand() {
+        return deadline;
     }
 }

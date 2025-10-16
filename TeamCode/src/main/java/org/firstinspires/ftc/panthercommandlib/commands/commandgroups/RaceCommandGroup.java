@@ -14,7 +14,7 @@ public class RaceCommandGroup extends CommandGroup {
     }
 
     @Override
-    public void init() {
+    public final void init() {
         for (Command command : commands) {
             CommandRunner.forceRunCommand(command);
         }
@@ -22,7 +22,7 @@ public class RaceCommandGroup extends CommandGroup {
 
 
     @Override
-    public void update() {
+    public final void update() {
         for (Command command : commands) {
             if (!CommandRunner.getCommandsRunning().contains(command)) {
                 for (Command commandToEnd : commands) {
@@ -38,7 +38,7 @@ public class RaceCommandGroup extends CommandGroup {
     }
 
     @Override
-    public boolean isFinished() {
+    public final boolean isFinished() {
         return end;
     }
 }

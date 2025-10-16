@@ -5,7 +5,9 @@ public class Timer {
     private long stopTime;
     private boolean running;
 
-    // Start the timer
+    /**
+     * Start the timer
+     */
     public void start() {
         startTime = System.currentTimeMillis();
         running = true;
